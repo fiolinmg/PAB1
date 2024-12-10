@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_button_navigation/data/candi_data.dart';
 import 'package:flutter_button_navigation/models/candi.dart';
+import 'package:flutter_button_navigation/screens/detail_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -27,45 +28,55 @@ class HomeScreen extends StatelessWidget {
                 Candi candi = candiList[index];
 
                 //tampilan utk 1 grid
-                return Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16)), 
-                  margin: const EdgeInsets.all(6),
-                  elevation: 1,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Expanded(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(16),
-                          child: Image.asset(
-                            candi.imageAsset,
-                            fit: BoxFit.cover,
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context, 
+                      MaterialPageRoute(
+                        builder: (context) => 
+                        DetailScreen(varCandi: candi))); 
+                  },
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16)), 
+                    margin: const EdgeInsets.all(6),
+                    elevation: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        //gbr candi
+                        Expanded(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(16),
+                            child: Image.asset(
+                              candi.imageAsset,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
-                      ),
-                      //nama candi
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16, top: 8),
-                        child: Text(
-                          candi.name,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
+                        //nama candi
+                        Padding(
+                          padding: const EdgeInsets.only(left: 16, top: 8),
+                          child: Text(
+                            candi.name,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
-                      //tipe candi
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16, top: 8),
-                        child: Text(
-                          candi.type,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
+                        //tipe candi
+                        Padding(
+                          padding: const EdgeInsets.only(left: 16, top: 8),
+                          child: Text(
+                            candi.type,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
-                    ],
-                  ) 
+                      ],
+                    ) 
+                  ),
                 );
               }
             )
